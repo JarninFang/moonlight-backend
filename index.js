@@ -30,9 +30,10 @@ app.post('/api/register', (req, res) => {
         email: body.email,
         password: body.password
     })
-
+    console.log(body)
     newUser.save().then(result => {
-        res.send(result.toJSON())
+        //res.send(result.toJSON())
+        res.status(200).send()
     }).catch(err => {
         console.log(err)
         res.status(400).send()
