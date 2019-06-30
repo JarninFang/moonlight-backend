@@ -21,6 +21,7 @@ app.get('/', (req, res) => {
 
 app.post('/api/register', (req, res) => {
     const body = req.body
+    console.log(req)
     if(!body.username || !body.email || !body.password) {
         return res.status(400).send();
     }
