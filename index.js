@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
 app.post('/api/register', (req, res) => {
     const body = req.body
     if(!body.username || !body.email || !body.password) {
-        res.status(400).send();
+        return res.status(400).send();
     }
 
     const newUser = new User({
