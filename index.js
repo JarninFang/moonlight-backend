@@ -21,8 +21,9 @@ app.get('/', (req, res) => {
 
 app.post('/api/register', (req, res) => {
     const body = req.body
+    //console.log(req)
     if(!body.username || !body.email || !body.password) {
-        res.status(400).send();
+        return res.status(400).send();
     }
 
     const newUser = new User({
@@ -32,8 +33,8 @@ app.post('/api/register', (req, res) => {
     })
     console.log(body)
     newUser.save().then(result => {
-        //res.send(result.toJSON())
-        res.status(200).send()
+        res.send(result.toJSON())
+        //res.status(200).send()
     }).catch(err => {
         console.log(err)
         res.status(400).send()
