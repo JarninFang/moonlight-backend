@@ -32,8 +32,8 @@ app.post('/api/register', (req, res) => {
     })
     console.log(body)
     newUser.save().then(result => {
-        //res.send(result.toJSON())
-        res.status(200).send()
+        res.send(result.toJSON())
+        //res.status(200).send()
     }).catch(err => {
         console.log(err)
         res.status(400).send()
