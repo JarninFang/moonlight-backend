@@ -1,15 +1,12 @@
 const mongoose = require('mongoose')
-const url = process.env.MONGODB_URI
-mongoose.connect(url, { useNewUrlParser: true }).then((result) => {
-    console.log('Connected to mongodb database ')
-}).catch(err => {
-    console.log('Error connecting to mongodb database')
-})
-
+const uniqueValidator = require('mongoose-unique-validator')
 const userSchema = mongoose.Schema({
-    username: String,
+    username: {
+        type: String,
+        unique: true
+    },
     email: String,
-    password: String
+    passwordHash: String
 })
 
 userSchema.set('toJSON', {
@@ -17,7 +14,10 @@ userSchema.set('toJSON', {
         returnedObj.id = returnedObj._id.toString()
         delete returnedObj._id
         delete returnedObj.__v
+        delete returnedObj.passwordHash
     }
 })
+
+userSchema.plugin(uniqueValidator)
 
 module.exports = mongoose.model('User', userSchema)
