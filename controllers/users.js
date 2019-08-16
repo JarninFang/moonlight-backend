@@ -23,6 +23,7 @@ usersRouter.post('/', async (req, res, next) => {
 			passwordHash,
 		})
 		const result = await newUser.save()
+		console.log(result)
 		res.send(result.toJSON())
 	} catch(exception) {
 		next(exception)
